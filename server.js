@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path'); // Add this line to import the path module
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -25,9 +26,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+// Add import for notes.html
 app.get('/notes', (req, res) =>
-	res.sendFile(path.join(__dirname, '/public/notes.html'))
-)
+  res.sendFile(path.join(__dirname, '/public/notes.html'))
+);
 
 // POST route to save a note
 app.post('/api/notes', (req, res) => {
