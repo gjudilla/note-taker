@@ -22,8 +22,12 @@ const writeData = (data) => {
 
 // GET route to fetch notes
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
+
+app.get('/notes', (req, res) =>
+	res.sendFile(path.join(__dirname, '/public/notes.html'))
+)
 
 // POST route to save a note
 app.post('/api/notes', (req, res) => {
