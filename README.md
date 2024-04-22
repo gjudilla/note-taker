@@ -4,7 +4,11 @@
 This is a simple note saving and organizing application that can be used to keep track of any tasks. 
 
 Demo:
-<!-- Insert images here -->
+
+
+Links: 
+https://github.com/gjudilla/note-taker.git 
+https://deploy-note-taker-2528576cd9ca.herokuapp.com
 
 ## Installation
 
