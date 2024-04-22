@@ -4,6 +4,7 @@
 This is a simple note saving and organizing application that can be used to keep track of any tasks. 
 
 Demo:
+<img width="1071" alt="Screenshot 2024-04-22 at 12 30 12 AM" src="https://github.com/gjudilla/note-taker/assets/148306966/78a275b3-1ade-429f-a44e-7ae24628dc19">
 
 
 Links: 
