@@ -1,24 +1,49 @@
-// importing packages and routes
 const express = require('express');
-const htmlRoutes = require('./routes/htmlRoutes');
-const apiRoutes = require('./routes/apiRoutes');
+const fs = require('fs');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// setting up PORT 
-const PORT = process.env.PORT || 3001; 
-const app = express(); 
+// Middleware to parse JSON bodies
+app.use(express.static(__dirname + '/'));
 
+// Path to the JSON database file
+const db = '/db/.db.json';
 
-// app.use((req,res,next) => {
+// Function to read data from the JSON file
+const readData = () => {
+  const data = fs.readFileSync(db);
+  return JSON.parse(data);
+};
 
-// })
+// Function to write data to the JSON file
+const writeData = (data) => {
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+};
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
-require('./routes/htmlRoutes')(app);
-require('./routes/apiRoutes')(app);
+// GET route to fetch notes
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-// Server listening to client request and text is logged in console
-app.listen(PORT, () =>
-  console.log(`Listening at http://localhost:${PORT}`)
-);
+// POST route to save a note
+app.post('/api/notes', (req, res) => {
+  const newNote = req.body;
+  const notes = readData();
+  notes.push(newNote);
+  writeData(notes);
+  res.status(201).json(newNote);
+});
+
+// DELETE route to delete a note by ID
+app.delete('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  let notes = readData();
+  notes = notes.filter(note => note.id !== id);
+  writeData(notes);
+  res.sendStatus(204);
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
